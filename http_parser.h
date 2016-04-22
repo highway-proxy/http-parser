@@ -356,6 +356,8 @@ void http_parser_pause(http_parser *parser, int paused);
 /* Checks if this is the final chunk of the body. */
 int http_body_is_final(const http_parser *parser);
 
+int http_is_new_message(const struct http_parser *);
+
 #ifdef __cplusplus
 }
 #endif

@@ -2460,6 +2460,12 @@ http_body_is_final(const struct http_parser *parser) {
     return parser->state == s_message_done;
 }
 
+int
+http_is_new_message(const struct http_parser *parser) {
+	return parser->state == (parser->type == HTTP_REQUEST ? s_start_req
+		: (parser->type == HTTP_RESPONSE ? s_start_res : s_start_req_or_res));
+}
+
 unsigned long
 http_parser_version(void) {
   return HTTP_PARSER_VERSION_MAJOR * 0x10000 |
