@@ -1,0 +1,19 @@
+
+CC = $(CROSS_COMPILE)gcc
+MD = @mkdir
+
+INCDIRS = -Iinclude
+CFLAGS += $(INCDIRS)
+
+all: lib lib/libhttp_parser.a
+
+lib/libhttp_parser.a : http_parser.o
+	$(AR) rc $@ $<
+
+.PHONY: lib
+lib :
+ifeq ("$(wildcard lib)","")
+	$(MD) lib
+endif
+
+http_parser.o : http_parser.c
